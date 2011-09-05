@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Animation with CSS3</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<style>
+  *{margin:0;padding:0;font-size:15px;font-family:helvetica,arial,sans-serif}
+  body{background:#fff;color:#333}
+  footer,section,header{display:block;}
+  h1{font-size:24px;color:#369;font-family:futura,arial;margin:5px;}
+  footer{position:absolute;bottom:5px;right:5px;}
+  footer p,footer a{font-size:10px;color:#ccc}
+  canvas {
+    -moz-animation-duration: 1s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-name: rotate;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: rotate;
+    -ms-animation-duration: 1s;
+    -ms-animation-timing-function: linear;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-name: rotate;
+    -o-animation-duration: 1s;
+    -o-animation-timing-function: linear;
+    -o-animation-iteration-count: infinite;
+    -o-animation-name: rotate;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-name: rotate;
+  }
+  @-moz-keyframes rotate {
+    from {
+      -moz-transform:rotate( 0deg );
+    }
+    to {
+      -moz-transform:rotate( 360deg );      
+    }
+  }
+  @-webkit-keyframes rotate {
+    from {
+      -webkit-transform:rotate( 0deg );
+    }
+    to {
+      -webkit-transform:rotate( 360deg );      
+    }
+  }
+  @-o-keyframes rotate {
+    from {
+      -o-transform:rotate( 0deg );
+    }
+    to {
+      -o-transform:rotate( 360deg );      
+    }
+  }
+  @-ms-keyframes rotate {
+    from {
+      -ms-transform:rotate( 0deg );
+    }
+    to {
+      -ms-transform:rotate( 360deg );      
+    }
+  }
+  @-keyframes rotate {
+    from {
+      transform:rotate( 0deg );
+    }
+    to {
+      transform:rotate( 360deg );      
+    }
+  }
+  
+  
+</style>
+</head>
+<body>
+  <header><h1>Animation with CSS3</h1></header>
+  <section>
+  </section>
+  <footer>
+  <p>Written by 
+    <a href="http://wait-till-i.com/">Chris Heilmann</a> - 
+    <a href="http://twitter.com/codepo8">@codepo8</a>
+  </p>
+</footer>
+<script>
+
+// prepare the animation canvas and the draw canvas
+var drawcanvas = document.createElement( 'canvas' ),
+    drawctx = drawcanvas.getContext( '2d' );
+
+// dimensions and container element     
+var container = document.querySelector('section'),
+    height = width = 300,
+    halfwidth = width / 2,
+    halfheight = height / 2,
+    offset = i = x = 0,
+    radius = height / 2 - 10;
+
+function init(){
+  
+  drawcanvas.width = width;
+  drawcanvas.height = height;
+  container.appendChild( drawcanvas );
+
+  drawctx.save();
+  drawctx.translate( halfwidth, halfheight );
+
+  while( radius > 10 ) {
+    drawctx.fillStyle = i % 2 === 0 ? '#000' : '#fff';
+    radius -= 6;
+    x = Math.sin( i / 2 ) * 10;
+    drawctx.beginPath();
+    drawctx.arc( x, 0, radius, 0, Math.PI * 2 ,true ); 
+    drawctx.closePath();
+    drawctx.fill(); 
+    i++;
+  }
+
+  drawctx.restore();
+
+}
+
+window.addEventListener( 'load', init, false );
+
+</script>
+</body>
+</html>
